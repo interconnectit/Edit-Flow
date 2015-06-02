@@ -361,14 +361,15 @@ class EF_Custom_Status extends EF_Module {
 		if ( !empty( $post ) && $this->is_whitelisted_page() ) {
 
 			$custom_statuses = $this->get_custom_statuses();
+			$post_status = get_post_status( $post->ID );
 
 			// Get the status of the current post
-			if ( $post->ID == 0 || $post->post_status == 'auto-draft' || $pagenow == 'edit.php' ) {
+			if ( $post->ID == 0 || $post_status  == 'auto-draft' || $pagenow == 'edit.php' ) {
 				// TODO: check to make sure that the default exists
 				$selected = $this->get_default_custom_status()->slug;
 
 			} else {
-				$selected = $post->post_status;
+				$selected = $post_status;
 			}
 
 			// Get the current post status name
